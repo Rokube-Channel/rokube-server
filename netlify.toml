@@ -3,8 +3,10 @@ functions = "functions"
 
 [functions] 
 external_node_modules = ["express"] 
-node_bundler = "esbuild" 
+node_bundler = "esbuild"
+directory = "functions"
 included_files = ["src/router/pages/home/home.html","src/router/pages/auth/auth.html","src/router/pages/auth/login.html","src/router/pages/error/error.html","src/router/pages/how-get-api-credentials/how-get-api-credentials.html"]
+
 [[redirects]] 
 from = "/*" 
 to = "/.netlify/functions/server" 
