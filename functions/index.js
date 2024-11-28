@@ -1,5 +1,3 @@
-const serverless = require("serverless-http")
+const server = require("../src/server")
 
-const server = require("./src/server")
-
-module.exports.handler = serverless(server())
+server().listen(3000, () => console.log("Servidor listo ..."))

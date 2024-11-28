@@ -7,11 +7,8 @@ const init = async () => {
     
     app.use(express.static('public'))
     app.use(bodyParser.json());
-
-
-    app.use("/.netlify/functions/index/api", routes)
+    app.use(routes)
     return app;
-    // app.listen(3000, () => console.log("Servidor listo ..."))
 }
 
 module.exports = init
