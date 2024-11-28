@@ -1,14 +1,18 @@
-const node_cache = require( "node-cache" );
-const methods = require("../methods/index");
+const oauth2 =  require('google-auth-library');
 
-const { verifyAndRefreshToken } = methods
+const { OAuth2Client } = oauth2
+const node_cache = require( "node-cache" );
+
 const myCache = new node_cache();
 
-const MiddlewareRequest = async (req, res, next) => {
+const MiddlewareCache = async (req, res, next) => {
+    req.myCache = myCache;
+    next();
+}
+
+const MiddlewareServer = async (req, res, next) => {
     const { headers } = req
     const { authorization = undefined, clientid = undefined, clientsecret = undefined } = headers;
-
-    req.myCache = myCache;
     
     if(authorization && authorization.startsWith('Bearer ') && clientid && clientsecret){
         credentials = JSON.parse(authorization.slice(7));
@@ -34,4 +38,26 @@ const MiddlewareRequest = async (req, res, next) => {
     next();
 }
 
-module.exports = MiddlewareRequest
+const verifyAndRefreshToken = async (clientid, clientsecret,credentials) => {
+    const oAuth2Client = new OAuth2Client(clientid, clientsecret);
+
+    let newCredentials = undefined
+    oAuth2Client.setCredentials(credentials);
+    
+    try { 
+        await oAuth2Client.getTokenInfo(oAuth2Client.credentials.access_token); 
+        newCredentials = oAuth2Client.credentials
+    } catch (error) { 
+        code = (error?.response?.data?.error ?? "") == "invalid_token"? 401 : 0
+        if (code === 401) { 
+            const tokens = await oAuth2Client.refreshAccessToken();
+            newCredentials = tokens.credentials
+        } 
+        else { 
+            throw error; 
+        } 
+    }
+    return newCredentials
+}
+
+module.exports = { MiddlewareServer, MiddlewareCache }

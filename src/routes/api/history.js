@@ -1,20 +1,20 @@
 const youtubei = require('youtubei.js');
-const methods = require("../methods/index")
+const methods = require("../../utils")
 
 const { Innertube } = youtubei
 const { videoListFormat } = methods
 
-const SearchRequest = async (req, res) => {
+const HistoryRequest = async (req, res) => {
     const { myOauth: credentials, query } = req
-    let { s = "", page = 0 } = query
+    let { page = 0 } = query
 
     let expired = false
 
     page = !isNaN(page)? parseInt(page):0
 
-    try{
-        const innertube = await Innertube.create({ lang: "es", location: "MX" });
-    
+    try {
+        const innertube = await Innertube.create();
+
         if (credentials) {
             const timeout = setTimeout(() => { 
                 expired = true
@@ -30,21 +30,20 @@ const SearchRequest = async (req, res) => {
 
             clearTimeout(timeout)
         }
-    
-        const suggestions = await innertube.getSearchSuggestions(s).then(async (results) => {
-            return await results.reduce((acc, current) => [...acc, { title: current }], [])
-        }).catch(_ => [])
-    
-        let search = await innertube.search(s)
+
+        let feed = await innertube.getHistory()
+        .catch(err => {
+            console.error(err)
+            return []
+        })
     
         for(let i=1; i<=page; i++){
-            search = await search.getContinuation().catch(err=> search);
+            feed = await feed.getContinuation().catch(err=> feed);
         }
-        
-        const videos = search.videos
+        const videos = feed.videos
     
         if(!expired){
-            return res.json({ suggestions: page==0? suggestions:undefined, search: videoListFormat(videos) });
+            return res.json({ history: videoListFormat(videos) });
         }
     }
     catch (err) { 
@@ -53,4 +52,4 @@ const SearchRequest = async (req, res) => {
     }
 }
 
-module.exports = SearchRequest
+module.exports = HistoryRequest

@@ -1,42 +1,12 @@
 const oauth2 =  require('google-auth-library');
-const QRCode = require('qrcode');
-const ShortUniqueId = require('short-unique-id');
+const path = require('path');
 
 const { OAuth2Client } = oauth2
 const redirectUri = `http://localhost:3000/login`
 
-const RendezvousLinkingRequest = async (req, res) => {
-    const { myCache, headers, hostname, protocol } = req
-    const { clientid = undefined, clientsecret = undefined } = headers
-    const x_device = req.headers["x-device"] ?? "";
-
-    try{
-        const myXDevice = myCache.get(x_device)
-        if(!myXDevice){
-            const uid = new ShortUniqueId({ length: 8 });
-            const deviceCode = uid.rnd();
-            const verification_url = `${protocol}://${hostname}:3000/oauth/${deviceCode}`
-            const base64 = (await QRCode.toDataURL(verification_url)).split(',')[1];
-
-            myCache.set(deviceCode, { client: { clientid, clientsecret } } , 600 )
-            res.setHeader('x-device', deviceCode)
-            return res.json({ user_code: deviceCode, verification_url, base64 });
-        }
-        else{
-            if(myXDevice.access_token){
-                res.setHeader('credentials', JSON.stringify(myXDevice));
-                myCache.del(x_device)
-                return res.json({ auth: "complete" });
-            }
-            else{
-                return res.json({ auth: "pending" });
-            }
-        }
-    }
-    catch (err) { 
-        console.error('Error:', err);
-        return res.status(500).json({ error: "Internal Server Error" }); 
-    }
+const AuthRequest = async (req, res) => {
+    const { error } = req.query;
+    return res.sendFile(path.join(__dirname, "auth.html"), { error })
 }
 
 const OauthRequest = async (req, res) => {
@@ -45,7 +15,7 @@ const OauthRequest = async (req, res) => {
 
     const device = myCache.get(code);
     if (!code || !device) {
-        return res.json({ message: 'No code provided.' });
+        return res.redirect("/auth?error=No code provided.");
     }
 
     try{
@@ -73,7 +43,7 @@ const OauthRequest = async (req, res) => {
     }
     catch (err) { 
         console.error("Error ", err)
-        return res.status(500).json({ error: "Internal Server Error" }); 
+        return res.redirect(`/auth?error=Internal Server Error`);
     }
 }
 
@@ -84,7 +54,7 @@ const LoginRequest = async (req, res) => {
     const device = myCache.get(state);
 
     if (!code || !device) {
-        return res.json({ message: 'No code provided.' });
+        return res.sendFile(path.join(__dirname, "login.html"),);
     }
 
     try{
@@ -103,19 +73,16 @@ const LoginRequest = async (req, res) => {
                 expiry_date: new Date(tokens.expiry_date).toISOString(),
             }
             myCache.set(state, credentials, 600 )
-            console.log("--------credentials--------")
-            console.log(credentials)
-            console.log("---------------------------")
-            return res.json({ message: "Auth" });
+            return res.sendFile(path.join(__dirname, "login.html"));
         }
         else {
-            return res.json({ message: "No Auth" })
+            return res.redirect("/error")
         }
     }
     catch(err){
         console.error('Error:', err); 
-        return res.status(500).json({ message: err.message ?? err })
+        return res.redirect("/error")
     }
 }
 
-module.exports = { RendezvousLinkingRequest, LoginRequest, OauthRequest}
+module.exports = { AuthRequest, LoginRequest, OauthRequest}

@@ -1,10 +1,10 @@
 const youtubei = require('youtubei.js');
-const methods = require("../methods/index")
+const methods = require("../../utils")
 
 const { Innertube } = youtubei
 const { videoListFormat } = methods
 
-const HistoryRequest = async (req, res) => {
+const HomeRequest = async (req, res) => {
     const { myOauth: credentials, query } = req
     let { page = 0 } = query
 
@@ -13,7 +13,7 @@ const HistoryRequest = async (req, res) => {
     page = !isNaN(page)? parseInt(page):0
 
     try {
-        const innertube = await Innertube.create();
+        const innertube = await Innertube.create({ lang: "es", location: "MX" });
 
         if (credentials) {
             const timeout = setTimeout(() => { 
@@ -31,7 +31,7 @@ const HistoryRequest = async (req, res) => {
             clearTimeout(timeout)
         }
 
-        let feed = await innertube.getHistory()
+        let feed = await innertube.getHomeFeed()
         .catch(err => {
             console.error(err)
             return []
@@ -43,7 +43,7 @@ const HistoryRequest = async (req, res) => {
         const videos = feed.videos
     
         if(!expired){
-            return res.json({ history: videoListFormat(videos) });
+            return res.json({ home: videoListFormat(videos) });
         }
     }
     catch (err) { 
@@ -52,4 +52,4 @@ const HistoryRequest = async (req, res) => {
     }
 }
 
-module.exports = HistoryRequest
+module.exports = HomeRequest

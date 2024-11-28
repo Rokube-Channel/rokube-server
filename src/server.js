@@ -5,6 +5,7 @@ const routes = require('./routes');
 const init = async () => {
     const app = express()
     
+    app.use(express.static('public'))
     app.use(bodyParser.json());
     app.use(routes);
     app.listen(3000, () => console.log("Servidor listo ..."))
