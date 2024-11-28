@@ -8,7 +8,8 @@ const init = async () => {
     app.use(express.static('public'))
     app.use(bodyParser.json());
     app.use(routes);
-    app.listen(3000, () => console.log("Servidor listo ..."))
+    return app;
+    // app.listen(3000, () => console.log("Servidor listo ..."))
 }
 
 module.exports = init

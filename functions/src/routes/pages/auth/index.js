@@ -2,7 +2,7 @@ const oauth2 =  require('google-auth-library');
 const path = require('path');
 
 const { OAuth2Client } = oauth2
-const redirectUri = `http://localhost:3000/login`
+const redirectUri = `https://rokube.netlify.app/login`
 
 const AuthRequest = async (req, res) => {
     const { error } = req.query;

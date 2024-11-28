@@ -11,7 +11,7 @@ const RendezvousLinkingRequest = async (req, res) => {
         if(!myXDevice){
             const uid = new ShortUniqueId({ length: 8 });
             const deviceCode = uid.rnd();
-            const verification_url = `${protocol}://${hostname}:3000/auth`
+            const verification_url = `https://rokube.netlify.app/auth`
             const base64 = (await QRCode.toDataURL(`verification_url/${deviceCode}`)).split(',')[1];
 
             myCache.set(deviceCode, { client: { clientid, clientsecret } } , 600 )
