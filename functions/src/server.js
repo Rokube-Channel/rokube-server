@@ -7,7 +7,9 @@ const init = async () => {
     
     app.use(express.static('public'))
     app.use(bodyParser.json());
-    app.use(routes);
+
+
+    app.use("/.netlify/functions/index/api", routes)
     return app;
     // app.listen(3000, () => console.log("Servidor listo ..."))
 }
