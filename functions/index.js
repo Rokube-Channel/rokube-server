@@ -1,3 +1,6 @@
-const server = require("../src/server")
+const server = require("./src/app");
 
-server().listen(3000, () => console.log("Servidor listo ..."))
+(async () => { 
+    const app = await server(); 
+    app.listen(3000, () => console.log("Servidor listo ...")); 
+})();
