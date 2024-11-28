@@ -4,8 +4,8 @@ functions = "functions"
 [functions] 
 external_node_modules = ["express"] 
 node_bundler = "esbuild"
-directory = "functions/src/router/pages/"
-included_files = ["home/home.html","auth/auth.html","auth/login.html","error/error.html","how-get-api-credentials/how-get-api-credentials.html"]
+directory = "functions"
+included_files = ["src/router/pages/home/home.html","src/router/pages/auth/auth.html","src/router/pages/auth/login.html","src/router/pages/error/error.html","src/router/pages/how-get-api-credentials/how-get-api-credentials.html"]
 
 [[redirects]] 
 from = "/*" 
