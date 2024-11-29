@@ -8,7 +8,7 @@ const redirectUri = `https://rokube.netlify.app/login`
 
 const AuthRequest = async (req, res) => {
     const { error } = req.query;
-    return res.send(Auht)
+    return res.send(AuthPage)
 }
 
 const OauthRequest = async (req, res) => {
