@@ -8,15 +8,15 @@ const HomePage = `
     <title>Rokube (Official)</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
-    <script src="/js/home.js"></script>
+    <script src="/public/js/tailwind.config.js"></script>
+    <script src="/public/js/home.js"></script>
 </head>
 
 <body class="bg-color-bg text-color-text text-xl p-10">
     <div class="container mx-auto flex flex-col gap-24">
         
         <div class="flex flex-row justify-center items-center h-32 relative">
-            <img class="h-full w-full object-contain" src="/images/rokube.png" />
+            <img class="h-full w-full object-contain" src="/public/images/rokube.png" />
         </div>
         
         <div>
@@ -26,17 +26,17 @@ const HomePage = `
         <div class="flex flex-row gap-5 h-52 sm:h-96 relative">
 
             <div class="w-0 sm:w-1/4">
-                <img class="object-contain h-full w-full" src="/images/roku_remote.png" alt="roku remote" />
+                <img class="object-contain h-full w-full" src="/public/images/roku_remote.png" alt="roku remote" />
             </div>
 
             <div class="flex-1 relative">
 
                 <div id="images">
-                    <img src="/images/rokube_screenshot_01.jpg" alt="Rokube screen" class="object-contain h-full w-full block" />
-                    <img src="/images/rokube_screenshot_02.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
-                    <img src="/images/rokube_screenshot_03.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
-                    <img src="/images/rokube_screenshot_04.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
-                    <img src="/images/rokube_screenshot_05.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
+                    <img src="/public/images/rokube_screenshot_01.jpg" alt="Rokube screen" class="object-contain h-full w-full block" />
+                    <img src="/public/images/rokube_screenshot_02.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
+                    <img src="/public/images/rokube_screenshot_03.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
+                    <img src="/public/images/rokube_screenshot_04.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
+                    <img src="/public/images/rokube_screenshot_05.jpg" alt="Rokube screen" class="object-contain h-full w-full hidden" />
                 </div>
 
                 <a id="prev"
