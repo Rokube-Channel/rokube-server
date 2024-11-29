@@ -6,17 +6,17 @@ const HowGetAPICredentialsPage = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rokube How Get API Credentials</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/public/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
-    <script src="/js/home.js"></script>
+    <script src="/public/js/tailwind.config.js"></script>
+    <script src="/public/js/home.js"></script>
 </head>
 
 <body class="bg-color-bg text-color-text text-xl p-10">
     <div class="container mx-auto flex flex-col gap-24">
         
         <div class="flex flex-row justify-center items-center h-32 relative">
-            <img class="h-full w-full object-contain" src="/images/rokube.png" />
+            <img class="h-full w-full object-contain" src="/public/images/rokube.png" />
         </div>
         
         <div>
@@ -29,34 +29,34 @@ const HowGetAPICredentialsPage = `
                 <li>
                     Go to Google <a class="underline-offset-2 text-color-secondary hover:opacity-80" href="https://console.cloud.google.com/">Cloud Console</a>
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/1-GoToGoogleCloudConsole.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/1-GoToGoogleCloudConsole.png" />
                     </div>
                 </li>
                 <li>
                     Sign in with your Google account.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/2-SignInWithYourGoogleAccount.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/2-SignInWithYourGoogleAccount.png" />
                     </div>
                 </li>
                 <li>
                     Click on Console
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/3-ClickOnConsole.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/3-ClickOnConsole.png" />
                     </div>
                 </li>
                 <li>
                     Click on the "Select a project" at the top and select "New Project".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/4-ClickOnSelectAProyect.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/4-ClickOnSelectAProyect.png" />
                     </div>
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/5-SelectNewProyect.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/5-SelectNewProyect.png" />
                     </div>
                 </li>
                 <li>
                     Give your project a name and click "Create".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/6-GiveYourProjectAName.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/6-GiveYourProjectAName.png" />
                     </div>
                 </li>
             </ul>
@@ -68,27 +68,27 @@ const HowGetAPICredentialsPage = `
                 <li>
                     Select "APIs & Services" and then "Library".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/7-SelectAPIs&Services.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/7-SelectAPIs&Services.png" />
                     </div>
                     <br />
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/8-GoToLibrary.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/8-GoToLibrary.png" />
                     </div>
                 </li>
                 <li>
                     Search for "YouTube Data API v3" and click on it.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/9-SearchYouTubeDataAPIv3_1.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/9-SearchYouTubeDataAPIv3_1.png" />
                     </div>
                     <br />
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/10-SearchYouTubeDataAPIv3_2.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/10-SearchYouTubeDataAPIv3_2.png" />
                     </div>
                 </li>
                 <li>
                     Click "Enable" to activate the API for your project.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/11-ClickEnableYoutubeDataAPIv3.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/11-ClickEnableYoutubeDataAPIv3.png" />
                     </div>
                 </li>
             </ul>
@@ -100,7 +100,7 @@ const HowGetAPICredentialsPage = `
                 <li>
                     Select "OAuth consent screen".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/12-OAuthConsentScreen.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/12-OAuthConsentScreen.png" />
                     </div>
                 </li>
                 <li>
@@ -111,7 +111,7 @@ const HowGetAPICredentialsPage = `
                         <li>Support Email: Provide an email address where users can contact you for support.</li>
                     </ul>
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/13-OAuthConsentScreenEdit_1.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/13-OAuthConsentScreenEdit_1.png" />
                     </div>
                 </li>
                 <li>
@@ -119,19 +119,19 @@ const HowGetAPICredentialsPage = `
                     <br>
                     These default scopes are usually sufficient for applications that only need to identify the user and do not require access to more sensitive data
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/14-OAuthConsentScreenEdit_2.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/14-OAuthConsentScreenEdit_2.png" />
                     </div>
                 </li>
                 <li>
                     Add All Users You Typically Use.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/15-OAuthConsentScreenEdit_3.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/15-OAuthConsentScreenEdit_3.png" />
                     </div>
                 </li>
                 <li>
                     Save and back to panel.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/16-OAuthConsentScreenEdit_4.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/16-OAuthConsentScreenEdit_4.png" />
                     </div>
                 </li>
             </ul>
@@ -143,19 +143,19 @@ const HowGetAPICredentialsPage = `
                 <li>
                     Select "Credentials".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/17-GoToCredentials.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/17-GoToCredentials.png" />
                     </div>
                 </li>
                 <li>
                     Click on "Create Credentials" and select "OAuth Client ID".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/18-GoToOAuthID.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/18-GoToOAuthID.png" />
                     </div>
                 </li>
                 <li>
                     Click on "Create Credentials" and select "OAuth Client ID".
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/18-GoToOAuthID.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/18-GoToOAuthID.png" />
                     </div>
                 </li>
                 <li>
@@ -165,7 +165,7 @@ const HowGetAPICredentialsPage = `
                         <li>And you can then give the credential any name you prefer..</li>
                     </ul>
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/19-CreateOAuthCredentials.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/19-CreateOAuthCredentials.png" />
                     </div>
                 </li>
             </ul>
@@ -177,13 +177,13 @@ const HowGetAPICredentialsPage = `
                 <li>
                     In "APIs & Services" > "Credentials", select your "OAuth Client ID"
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/20-SelectOAuth2.0ClientIDs.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/20-SelectOAuth2.0ClientIDs.png" />
                     </div>
                 </li>
                 <li>
                     In the additional information section, you will see the "Customer ID" and "Client Secret". Copy these details to your Rokube channel.
                     <div class="flex flex-row justify-center items-center h-32 relative">
-                        <img class="h-full w-full object-contain" src="/images/howgetapicredentials/21-CopyCredentials.png" />
+                        <img class="h-full w-full object-contain" src="/public/images/howgetapicredentials/21-CopyCredentials.png" />
                     </div>
                 </li>
                 <li>

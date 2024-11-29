@@ -6,7 +6,7 @@ const HomePage = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rokube (Official)</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/public/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/public/js/tailwind.config.js"></script>
     <script src="/public/js/home.js"></script>

@@ -6,17 +6,17 @@ const AuthPage = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rokube Authenticator</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/public/images/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
-    <script src="/js/auth.js"></script>
+    <script src="/public/js/tailwind.config.js"></script>
+    <script src="/public/js/auth.js"></script>
 </head>
 
 <body class="bg-color-bg text-color-text text-xl p-10">
     <div class="container mx-auto flex flex-col gap-28">
 
         <div class="flex flex-row justify-center items-center h-32 relative">
-            <img class="h-full w-full object-contain" src="/images/rokube.png" />
+            <img class="h-full w-full object-contain" src="/public/images/rokube.png" />
         </div>
 
         <form id="form" class="capitalize flex flex-col gap-5" method="get">
