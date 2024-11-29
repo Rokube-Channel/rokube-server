@@ -1,7 +1,7 @@
-const path = require('path');
+const HomePage = require('./home');
 
 const HomeRequest = async (req, res) => {
-    return res.sendFile(path.join(__dirname, "/home.html"))
+    return res.send(HomePage)
 }
 
 module.exports = HomeRequest

@@ -1,9 +1,5 @@
 [build]
 functions = "functions"
-[functions] 
-external_node_modules = ["express"] 
-node_bundler = "esbuild" 
-included_files = [ "src/pages/home/home.html", "src/pages/auth/auth.html", "src/pages/auth/login.html", "src/pages/error/error.html", "src/pages/how-get-api-credentials/how-get-api-credentials.html" ]
 
 [[redirects]] 
 from = "/*" 

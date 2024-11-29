@@ -1,7 +1,7 @@
-const path = require('path');
+const ErrorPage = require("./error")
 
 const ErrorRequest = async (req, res) => {
-    return res.sendFile(path.join(__dirname, "error.html"))
+    return res.send(ErrorPage)
 }
 
 module.exports = ErrorRequest

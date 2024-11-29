@@ -1,3 +1,4 @@
+const AuthPage = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,3 +45,6 @@
 </body>
 
 </html>
+`
+
+module.exports = AuthPage

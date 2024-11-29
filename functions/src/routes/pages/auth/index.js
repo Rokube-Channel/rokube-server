@@ -1,12 +1,14 @@
 const oauth2 =  require('google-auth-library');
-const path = require('path');
+
+const AuthPage = require("./auth")
+const LoginPage = require("./login")
 
 const { OAuth2Client } = oauth2
 const redirectUri = `https://rokube.netlify.app/login`
 
 const AuthRequest = async (req, res) => {
     const { error } = req.query;
-    return res.sendFile(path.join(__dirname, "auth.html"), { error })
+    return res.send(Auht)
 }
 
 const OauthRequest = async (req, res) => {
@@ -54,7 +56,7 @@ const LoginRequest = async (req, res) => {
     const device = myCache.get(state);
 
     if (!code || !device) {
-        return res.sendFile(path.join(__dirname, "login.html"),);
+        return res.redirect("/error");
     }
 
     try{
@@ -73,7 +75,7 @@ const LoginRequest = async (req, res) => {
                 expiry_date: new Date(tokens.expiry_date).toISOString(),
             }
             myCache.set(state, credentials, 600 )
-            return res.sendFile(path.join(__dirname, "login.html"));
+            return res.send(LoginPage);
         }
         else {
             return res.redirect("/error")
