@@ -4,7 +4,7 @@ const ShortUniqueId = require('short-unique-id');
 const redirectUri = `https://rokube.netlify.app/auth`
 
 const RendezvousLinkingRequest = async (req, res) => {
-    const { myCache, headers, hostname, protocol } = req
+    const { myCache, headers } = req
     const { clientid = undefined, clientsecret = undefined } = headers
     const x_device = req.headers["x-device"] ?? "";
 
