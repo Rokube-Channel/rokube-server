@@ -56,7 +56,7 @@ const LoginRequest = async (req, res) => {
     const device = myCache.get(state);
 
     if (!code || !device) {
-        return res.redirect("/error");
+        return res.redirect({ error: "No code" });
     }
 
     try{
@@ -78,12 +78,12 @@ const LoginRequest = async (req, res) => {
             return res.send(LoginPage);
         }
         else {
-            return res.redirect("/error")
+            return res.redirect({ error: "No token" })
         }
     }
     catch(err){
         console.error('Error:', err); 
-        return res.redirect("/error")
+        return res.redirect({ error: err })
     }
 }
 
