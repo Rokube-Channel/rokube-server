@@ -1,6 +1,8 @@
 const QRCode = require('qrcode');
 const ShortUniqueId = require('short-unique-id');
 
+const redirectUri = `https://rokube.netlify.app/auth`
+
 const RendezvousLinkingRequest = async (req, res) => {
     const { myCache, headers, hostname, protocol } = req
     const { clientid = undefined, clientsecret = undefined } = headers
@@ -11,8 +13,8 @@ const RendezvousLinkingRequest = async (req, res) => {
         if(!myXDevice){
             const uid = new ShortUniqueId({ length: 8 });
             const deviceCode = uid.rnd();
-            const verification_url = `https://rokube.netlify.app/auth`
-            const base64 = (await QRCode.toDataURL(`verification_url/${deviceCode}`)).split(',')[1];
+            const verification_url = redirectUri
+            const base64 = (await QRCode.toDataURL(`${redirectUri}/${deviceCode}`)).split(',')[1];
 
             myCache.set(deviceCode, { client: { clientid, clientsecret } } , 600 )
             res.setHeader('x-device', deviceCode)
