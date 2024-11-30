@@ -34,7 +34,6 @@ const OauthRequest = async (req, res) => {
                 "https://www.googleapis.com/auth/youtube",
                 "https://www.googleapis.com/auth/youtube.force-ssl",
                 "https://www.googleapis.com/auth/youtube-paid-content",
-                "https://www.googleapis.com/auth/accounts.reauth",
             ],
             include_granted_scopes: true,
             prompt: 'consent',
@@ -56,7 +55,7 @@ const LoginRequest = async (req, res) => {
     const device = myCache.get(state);
 
     if (!code || !device) {
-        return res.redirect({ error: "No code" });
+        return res.redirect(`/auth?error=No device`);
     }
 
     try{
@@ -78,12 +77,12 @@ const LoginRequest = async (req, res) => {
             return res.send(LoginPage);
         }
         else {
-            return res.redirect({ error: "No token" })
+            return res.redirect(`/auth?error=No token`)
         }
     }
     catch(err){
         console.error('Error:', err); 
-        return res.redirect({ error: err })
+        return res.redirect(`/auth?error=Internal Server Error`)
     }
 }
 
