@@ -30,11 +30,11 @@ const OauthRequest = async (req, res) => {
         const authorizationUrl = oAuth2Client.generateAuthUrl({
             access_type: 'offline',
             scope: [
-                "http://gdata.youtube.com",
                 "https://www.googleapis.com/auth/youtube",
                 "https://www.googleapis.com/auth/youtube.force-ssl",
+                "https://www.googleapis.com/auth/youtube.readonly",
                 "https://www.googleapis.com/auth/youtube-paid-content",
-                "https://www.googleapis.com/auth/accounts.reauth",
+                "https://www.googleapis.com/auth/userinfo.profile"
             ],
             include_granted_scopes: true,
             prompt: 'consent',
