@@ -36,7 +36,6 @@ const OauthRequest = async (req, res) => {
                 "https://www.googleapis.com/auth/youtube-paid-content",
                 "https://www.googleapis.com/auth/accounts.reauth",
             ],
-            include_granted_scopes: true,
             prompt: 'consent',
             state: code
         });
