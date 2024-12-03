@@ -4,7 +4,7 @@ const ErrorRequest = async (req, res) => {
 
     const myerror = myCache.get("myError")
     if(myerror){
-        error = myerror
+        error = JSON.parse(myerror)
     }
     return res.json({ error })
 }
