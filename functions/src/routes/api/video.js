@@ -9,7 +9,7 @@ const VideoRequest = async (req, res) => {
     let expired = false
     
     try{
-        const innertube = await Innertube.create({ lang: "es", location: "MX" });
+        const innertube = await Innertube.create();
     
         const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
         const info = await innertube.getInfo(id).catch(err => console.error(err))
@@ -17,7 +17,9 @@ const VideoRequest = async (req, res) => {
         const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
     
         const videoData = { ...primary_info, ...basic_info, ...(video ? video : streaming_data) }
-        
+
+        myCache.set("myVideo", JSON.stringify(videoData) , 600 )
+
         if (credentials) {
             const timeout = setTimeout(() => { 
                 expired = true
