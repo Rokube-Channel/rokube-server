@@ -11,6 +11,13 @@ const VideoRequest = async (req, res) => {
     try{
         const innertube = await Innertube.create({ lang: "es", location: "MX" });
     
+        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
+        const info = await innertube.getInfo(id).catch(err => console.error(err))
+    
+        const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
+    
+        const videoData = { ...primary_info, ...basic_info, ...(video ? video : streaming_data) }
+        
         if (credentials) {
             const timeout = setTimeout(() => { 
                 expired = true
@@ -23,18 +30,10 @@ const VideoRequest = async (req, res) => {
                 res.setHeader('logout', true);
                 return; 
             });
-
+            
             clearTimeout(timeout)
+            await info.addToWatchHistory()
         }
-    
-        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
-        const info = await innertube.getInfo(id).catch(err => console.error(err))
-    
-        const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
-    
-        const videoData = { ...primary_info, ...basic_info, ...(video ? video : streaming_data) }
-    
-        await info.addToWatchHistory()
     
         if(!expired){
             return res.json({
