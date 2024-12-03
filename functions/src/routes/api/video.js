@@ -11,12 +11,11 @@ const VideoRequest = async (req, res) => {
     try{
         const innertube = await Innertube.create();
     
-        const videoPromise = innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" });
-        const infoPromise = innertube.getInfo(id);
-
-        const [video, info] = await Promise.all([videoPromise, infoPromise])
-
+        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
+        const info = await innertube.getInfo(id).catch(err => console.error(err))
+    
         const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
+    
         const videoData = { ...primary_info, ...basic_info, ...(video || streaming_data) }
 
         myCache.set("myVideo", JSON.stringify(videoData) , 600 )
@@ -61,7 +60,7 @@ const VideoRequest = async (req, res) => {
     catch (err) { 
         const errorInfo = { message: err.message, stack: err.stack, name: err.name, date: new Date().toISOString() };
         myCache.set("myError", JSON.stringify(errorInfo) , 600 )
-        console.error('Error Video:', err); 
+        console.error('Error:', err); 
         return res.status(500).json({ error: "Internal Server Error" }); 
     }
 }
