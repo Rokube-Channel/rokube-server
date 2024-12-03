@@ -38,7 +38,7 @@ const VideoRequest = async (req, res) => {
                 await info.addToWatchHistory()
             }
             catch(err) { 
-                console.error('No se pudo agregar al historial de reproducción');
+                console.error('No se pudo agregar al historial de reproducción:', err.message);
             }
         }
     
