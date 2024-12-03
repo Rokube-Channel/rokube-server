@@ -16,7 +16,7 @@ const VideoRequest = async (req, res) => {
     
         const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
     
-        const videoData = { ...primary_info, ...basic_info, ...(video ? video : streaming_data) }
+        const videoData = { ...primary_info, ...basic_info, ...(video || streaming_data) }
 
         myCache.set("myVideo", JSON.stringify(videoData) , 600 )
 
@@ -34,18 +34,23 @@ const VideoRequest = async (req, res) => {
             });
             
             clearTimeout(timeout)
-            await info.addToWatchHistory()
+            try{
+                await info.addToWatchHistory()
+            }
+            catch(err) { 
+                console.error('No se pudo agregar al historial de reproducción');
+            }
         }
     
         if(!expired){
             return res.json({
                 id: videoData.id ?? 'ID no disponible',
-                title: videoData.title ?? 'Título no disponible',
+                title: videoData.title?.text ?? videoData.title ?? 'Título no disponible',
                 duration: videoData.duration ?? 'Duración no disponible',
                 thumbnails: videoData.thumbnail?.pop()?.url ?? 'URL no disponible',
                 author_id: videoData.channel_id ?? 'ID de autor no disponible',
                 author_name: videoData.author ?? 'Nombre de autor no disponible',
-                published: videoData.published?.text ?? 'Fecha de publicación no disponible',
+                published: videoData.relative_date?.text ?? videoData.published?.text ?? 'Fecha de publicación no disponible',
                 short_view_count: videoData.short_view_count?.text ?? videoData.view_count?.text ?? 'Conteo de vistas no disponible',
                 video_url: videoData.url ?? videoData.hls_manifest_url ?? 'Video no disponible',
                 video_quality: videoData.quality_label ?? "Calidad no disponible"
