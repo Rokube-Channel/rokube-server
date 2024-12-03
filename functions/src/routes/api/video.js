@@ -52,7 +52,7 @@ const VideoRequest = async (req, res) => {
         }
     }
     catch (err) { 
-        myCache.set("myError", err , 600 )
+        myCache.set("myError", JSON.stringify(err) , 600 )
         console.error('Error:', err); 
         return res.status(500).json({ error: "Internal Server Error" }); 
     }
