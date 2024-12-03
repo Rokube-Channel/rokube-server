@@ -3,7 +3,7 @@ const youtubei = require('youtubei.js');
 const { Innertube } = youtubei
 
 const VideoRequest = async (req, res) => {
-    const { myCache, myOauth: credentials, query } = req
+    const { myOauth: credentials, query } = req
     const { id = "" } = query
     
     let expired = false
@@ -18,8 +18,8 @@ const VideoRequest = async (req, res) => {
     
         const videoData = { ...primary_info, ...basic_info, ...(video || streaming_data) }
 
-        myCache.set("myVideo", JSON.stringify(videoData) , 600 )
-
+        console.log("My video ", video)
+        console.log("My info ", info)
         if (credentials) {
             const timeout = setTimeout(() => { 
                 expired = true
@@ -58,9 +58,7 @@ const VideoRequest = async (req, res) => {
         }
     }
     catch (err) { 
-        const errorInfo = { message: err.message, stack: err.stack, name: err.name, date: new Date().toISOString() };
-        myCache.set("myError", JSON.stringify(errorInfo) , 600 )
-        console.error('Error:', err); 
+        console.error('Error Video:', err); 
         return res.status(500).json({ error: "Internal Server Error" }); 
     }
 }
