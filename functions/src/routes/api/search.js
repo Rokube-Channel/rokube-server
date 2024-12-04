@@ -13,7 +13,7 @@ const SearchRequest = async (req, res) => {
     page = !isNaN(page)? parseInt(page):0
 
     try{
-        const innertube = await Innertube.create({ lang: "es", location: "MX" });
+        const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER", device_category: "desktop", enable_session_cache: false });
     
         if (credentials) {
             const timeout = setTimeout(() => { 

@@ -1,3 +1,4 @@
+const youtubedl = require('youtube-dl-exec')
 const youtubei = require('youtubei.js');
 
 const { Innertube } = youtubei
@@ -9,9 +10,18 @@ const VideoRequest = async (req, res) => {
     let expired = false
     
     try{
-        const innertube = await Innertube.create();
-    
+        const video = await youtubedl(`https://www.youtube.com/watch?v=${id}`, {
+            dumpSingleJson: true,
+            noCheckCertificates: true,
+            noWarnings: true,
+            preferFreeFormats: true,
+            addHeader: ['referer:youtube.com', 'user-agent:googlebot']
+        }).catch((err) => console.error(err))
+
         if (credentials) {
+
+            const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER", device_category: "desktop", enable_session_cache: false });
+
             const timeout = setTimeout(() => { 
                 expired = true
                 res.status(408).json({ error: "Request Timeout" });  
@@ -25,37 +35,30 @@ const VideoRequest = async (req, res) => {
             });
             
             clearTimeout(timeout)
-        }
-    
-        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
-        const info = await innertube.getInfo(id).catch(err => console.error(err))
-    
-        const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
-    
-        const videoData = { ...primary_info, ...basic_info, ...(video || streaming_data) }
 
-
-        try{
-            await info.addToWatchHistory()
+            try{
+                await innertube.getBasicInfo(id).addToWatchHistory()
+            }
+            catch(err) { 
+                console.error('No se pudo agregar al historial de reproducción:', err.message);
+            }
         }
-        catch(err) { 
-            console.error('No se pudo agregar al historial de reproducción:', err.message);
-        }
-        console.log("My video ", video)
-        console.log("My info ", info)
 
         if(!expired){
             return res.json({
-                id: videoData.id ?? 'ID no disponible',
-                title: videoData.title?.text ?? videoData.title ?? 'Título no disponible',
-                duration: videoData.duration ?? 'Duración no disponible',
-                thumbnails: videoData.thumbnail?.pop()?.url ?? 'URL no disponible',
-                author_id: videoData.channel_id ?? 'ID de autor no disponible',
-                author_name: videoData.author ?? 'Nombre de autor no disponible',
-                published: videoData.relative_date?.text ?? videoData.published?.text ?? 'Fecha de publicación no disponible',
-                short_view_count: videoData.short_view_count?.text ?? videoData.view_count?.text ?? 'Conteo de vistas no disponible',
-                video_url: videoData.url ?? videoData.hls_manifest_url ?? 'Video no disponible',
-                video_quality: videoData.quality_label ?? "Calidad no disponible"
+                id: video.id ?? 'ID no disponible',
+                title: video.title ?? 'Título no disponible',
+                thumbnails: video.thumbnail ?? 'URL no disponible',
+                duration: video.duration ?? 0,
+                duration_string: video.duration_string ?? 'Duración no disponible',
+                is_live: video.is_live ?? false,
+                author_id: video.channel_id ?? 'ID de autor no disponible',
+                author_name: video.channel ?? 'Nombre de autor no disponible',
+                video_url: video.url ?? 'Video no disponible',
+                video_quality: video.height? `${video.height}p` : "Calidad no disponible",
+                video_ext: video.video_ext ?? "Not Format",
+                published: video.timestamp? new Date(video.timestamp * 1000).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }): "Fecha de publicación no disponible",
+                short_view_count: video.view_count ?? 0
             })
         }
     }
