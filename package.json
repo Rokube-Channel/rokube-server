@@ -22,7 +22,6 @@
     "qrcode": "^1.5.4",
     "serverless-http": "^3.2.0",
     "short-unique-id": "^5.2.0",
-    "youtube-dl-exec": "^3.0.10",
     "youtubei.js": "^11.0.1"
   }
 }
