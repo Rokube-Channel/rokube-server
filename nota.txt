@@ -1,0 +1,12 @@
+Limpiar el puerto para ejecutar el programa.
+
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+
+
+ejemplo
+PS C:\Users\W11> netstat -ano | findstr :3000
+  TCP    0.0.0.0:3000           0.0.0.0:0              LISTENING       10292
+  TCP    [::]:3000              [::]:0                 LISTENING       10292
+PS C:\Users\W11> taskkill /PID 10292 /F
+Correcto: se terminó el proceso con PID 10292.

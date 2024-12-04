@@ -20,7 +20,7 @@ const VideoRequest = async (req, res) => {
 
         if (credentials) {
 
-            const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER", device_category: "desktop", enable_session_cache: false });
+            const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER" });
 
             const timeout = setTimeout(() => { 
                 expired = true

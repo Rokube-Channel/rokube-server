@@ -13,7 +13,7 @@ const HistoryRequest = async (req, res) => {
     page = !isNaN(page)? parseInt(page):0
 
     try {
-        const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER", device_category: "desktop", enable_session_cache: false });
+        const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER" });
 
         if (credentials) {
             const timeout = setTimeout(() => { 
