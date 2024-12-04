@@ -14,7 +14,7 @@ const LogoutRequest = async (req, res) => {
     }
 
     try{
-        const innertube = await Innertube.create({ client_type: "TVHTML5_SIMPLY_EMBEDDED_PLAYER" });
+        const innertube = await Innertube.create();
         if (credentials) {
             const timeout = setTimeout(() => { 
                 expired = true
