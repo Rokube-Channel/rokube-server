@@ -9,7 +9,7 @@ const VideoRequest = async (req, res) => {
     let expired = false
     
     try{
-        const innertube = await Innertube.create();
+        const innertube = await Innertube.create({ timezone: "GMT-06:00" });
     
         if (credentials) {
             const timeout = setTimeout(() => { 
@@ -27,8 +27,8 @@ const VideoRequest = async (req, res) => {
             clearTimeout(timeout)
         }
     
-        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency", client: "TV" }).catch(err => { })
-        const info = await innertube.getInfo(id, "TV").catch(err => console.error(err))
+        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency" }).catch(err => { })
+        const info = await innertube.getInfo(id).catch(err => console.error(err))
     
         const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
     
@@ -41,8 +41,8 @@ const VideoRequest = async (req, res) => {
         catch(err) { 
             console.error('No se pudo agregar al historial de reproducción:', err.message);
         }
-        console.log("My video ", video)
-        console.log("My info ", info)
+
+        console.log("vide", video)
 
         if(!expired){
             return res.json({
