@@ -27,8 +27,8 @@ const VideoRequest = async (req, res) => {
             clearTimeout(timeout)
         }
     
-        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency", client: "WEB" }).catch(err => { })
-        const info = await innertube.getInfo(id, "WEB").catch(err => console.error(err))
+        const video = await innertube.getStreamingData(id, { format: "mp4", type: "video+audio", quality: "bestefficiency", client: "TV" }).catch(err => { })
+        const info = await innertube.getInfo(id, "TV").catch(err => console.error(err))
     
         const { basic_info = {}, primary_info = {}, streaming_data = {} } = info
     
