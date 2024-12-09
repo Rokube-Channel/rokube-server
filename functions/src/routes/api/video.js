@@ -42,7 +42,7 @@ const VideoRequest = async (req, res) => {
             console.error('No se pudo agregar al historial de reproducción:', err.message);
         }
 
-        console.log("vide", video)
+        console.log("vide", videoData)
 
         if(!expired){
             return res.json({
@@ -53,7 +53,7 @@ const VideoRequest = async (req, res) => {
                 author_id: videoData.channel_id ?? 'ID de autor no disponible',
                 author_name: videoData.author ?? 'Nombre de autor no disponible',
                 published: videoData.relative_date?.text ?? videoData.published?.text ?? 'Fecha de publicación no disponible',
-                short_view_count: videoData.short_view_count?.text ?? videoData.view_count?.text ?? 'Conteo de vistas no disponible',
+                short_view_count: videoData.short_view_count?.text ?? videoData.view_count?.text ?? videoData.view_count ?? 'Conteo de vistas no disponible',
                 video_url: videoData.url ?? videoData.hls_manifest_url ?? 'Video no disponible',
                 video_quality: videoData.quality_label ?? "Calidad no disponible"
             })
