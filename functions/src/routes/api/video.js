@@ -7,6 +7,9 @@ const VideoRequest = async (req, res) => {
     const { id = "" } = query
 
     let expired = false
+
+    console.log(id)
+    
     try {
         const innertube = await Innertube.create();
 
@@ -40,9 +43,11 @@ const VideoRequest = async (req, res) => {
             }
         }
 
+        return res.json({ videoData })
+        
         if (!expired) {
             return res.json({
-                id,
+                id: videoData.video_details.id || 'ID no disponible',
                 title: videoData.video_details.title || 'Título no disponible',
                 duration: videoData.video_details.duration || 'Duración no disponible',
                 thumbnails: videoData.video_details.thumbnail?.pop()?.url || 'URL no disponible',
