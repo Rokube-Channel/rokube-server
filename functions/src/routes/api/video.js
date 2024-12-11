@@ -28,20 +28,28 @@ const VideoRequest = async (req, res) => {
 
             clearTimeout(timeout)
 
-            try{
-                const info = await innertube.getInfo(id).catch(err => console.error(err))
-                await info.addToWatchHistory()
-            }
-            catch(err) { 
-                console.error('No se pudo agregar al historial de reproducción:', err.message);
-            }
+            // try{
+            //     const info = await innertube.getInfo(id).catch(err => console.error(err))
+            //     await info.addToWatchHistory()
+            // }
+            // catch(err) { 
+            //     console.error('No se pudo agregar al historial de reproducción:', err.message);
+            // }
         }
-        
-        const videoData = await innertube.actions.execute('/player', {
-            videoId: id,
-            client: 'iOS',
-            parse: true,
-        });
+
+        // const videoData = await innertube.actions.execute('/player', {
+        //     videoId: id,
+        //     client: 'iOS',
+        //     parse: true,
+        // });
+
+        // const videoData = await innertube.actions.execute('/player', {
+        //     videoId: id,
+        //     client: 'iOS',
+        //     parse: true,
+        // });
+
+        const videoData = await innertube.getInfo(id, 'iOS').catch(err => console.error(err))
 
         return res.json({ videoData })
         
