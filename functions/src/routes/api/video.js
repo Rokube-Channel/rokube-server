@@ -7,9 +7,6 @@ const VideoRequest = async (req, res) => {
     const { id = "" } = query
 
     let expired = false
-
-    console.log(id)
-    
     try {
         const innertube = await Innertube.create();
 
@@ -45,15 +42,14 @@ const VideoRequest = async (req, res) => {
 
         if (!expired) {
             return res.json({
-                id: videoData.video_details.id ?? 'ID no disponible',
-                title: videoData.video_details.title ?? 'Título no disponible',
-                duration: videoData.video_details.duration ?? 'Duración no disponible',
-                thumbnails: videoData.video_details.thumbnail?.pop()?.url ?? 'URL no disponible',
-                author_id: videoData.video_details.channel_id ?? 'ID de autor no disponible',
-                author_name: videoData.video_details.author ?? 'Nombre de autor no disponible',
-                short_view_count: videoData.video_details.view_count ?? 'Conteo de vistas no disponible',
-                video_url: videoData.streaming_data.formats[0] ?? videoData.streaming_data.hls_manifest_url ?? 'Video no disponible',
-                video_quality: videoData.streaming_data.quality_label ?? "Calidad no disponible"
+                id,
+                title: videoData.video_details.title || 'Título no disponible',
+                duration: videoData.video_details.duration || 'Duración no disponible',
+                thumbnails: videoData.video_details.thumbnail?.pop()?.url || 'URL no disponible',
+                author_id: videoData.video_details.channel_id || 'ID de autor no disponible',
+                author_name: videoData.video_details.author || 'Nombre de autor no disponible',
+                short_view_count: videoData.video_details.view_count || 'Conteo de vistas no disponible',
+                video_url: videoData.streaming_data.hls_manifest_url || 'Video no disponible',
             })
         }
     }
