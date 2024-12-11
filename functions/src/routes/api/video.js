@@ -13,12 +13,6 @@ const VideoRequest = async (req, res) => {
     try {
         const innertube = await Innertube.create();
 
-        const videoData = await innertube.actions.execute('/player', {
-            videoId: id,
-            client: 'iOS',
-            parse: true,
-        });
-
         if (credentials) {
             const timeout = setTimeout(() => {
                 expired = true
@@ -42,6 +36,12 @@ const VideoRequest = async (req, res) => {
                 console.error('No se pudo agregar al historial de reproducción:', err.message);
             }
         }
+        
+        const videoData = await innertube.actions.execute('/player', {
+            videoId: id,
+            client: 'iOS',
+            parse: true,
+        });
 
         return res.json({ videoData })
         
