@@ -49,7 +49,7 @@ const VideoRequest = async (req, res) => {
         //     parse: true,
         // });
 
-        const videoData = await innertube.getInfo(id, 'iOS').catch(err => console.error(err))
+        const videoData = await innertube.getInfo(id, 'WEB').catch(err => console.error(err))
 
         return res.json({ videoData })
         
