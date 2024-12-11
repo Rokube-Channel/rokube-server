@@ -8,6 +8,8 @@ const VideoRequest = async (req, res) => {
 
     let expired = false
 
+    console.log(id)
+    
     try {
         const innertube = await Innertube.create();
 
